@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'react-bootstrap/Image'
 
 function HelloWorld() {
     const [message, setMessage] = useState(0)
@@ -7,7 +8,6 @@ function HelloWorld() {
     useEffect(() => {
       axios.get('http://localhost:8000/api/hello-world')
         .then(response => {
-            console.log(response.data);
           setMessage(response.data.message);
         })
         .catch(error => {
