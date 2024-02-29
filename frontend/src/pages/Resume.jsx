@@ -1,35 +1,16 @@
 import React from 'react';
-import { Container, Row, Col, Button, Stack, Badge } from 'react-bootstrap';
-import useFetchApi from './utils/useFetchApi';
+import { Container, Row, Col, Stack, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function Home() {
-    const apiUrl = import.meta.env.VITE_API_BASE_URL;
-
-    const { data, isLoading, error } = useFetchApi(apiUrl + '/api/hello-world');
-
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    
+function Project() {
     return (
-        <Container style={{textAlign: 'left'}}>
+        <Container className="home-page text-start">
             <Row className='mb-3 mt-5'>
-                <Col md={8} className="mx-auto" style={{textAlign: 'left'}}>
-                    <h1>Bryan Kristofferson : {data.message}</h1>
-                    <strong>Software Engineer</strong>
-                    <div>
-                        I'm a passionate software engineer with expertise in fullstack web development,
-                        system architecture.
-                    </div>
-                </Col>
-            </Row>
-            <Row className='mb-3'>
                 <Col md={8} className="mx-auto">
                     <h2>Experience</h2>
-                        <strong>Software Engineer</strong> at <em>Data Annotation Tech</em> (2024-Present)
-                        <br />
-                        <strong>Software Engineer</strong> at <em>ILN</em> (2023-2024)
+                        <strong>Software Engineer</strong> at <Link to={"https://www.iln.app/"} target="_blank" rel="noopener noreferrer">ILN</Link> (2023-2024)
                     <br />
-                        <strong>Correctional Systems Officer</strong> at <em>Department of Justice</em> (2010-Present)
+                        <strong>Correctional Systems Officer</strong> at <Link to={"https://www.bop.gov/jobs/"} target="_blank" rel="noopener noreferrer">Federal Bureau of Prisons</Link> (2010-Present)
                 </Col>
             </Row>
             <Row className='mb-3'>
@@ -45,8 +26,8 @@ function Home() {
                         </div>
                         <h5>Backend</h5>
                         <div>
+                        <Button variant='outline-dark'>Python</Button>{' '}
                         <Button variant='outline-dark'>C#</Button>{' '}
-                        <Button variant='outline-dark'>Go</Button>{' '}
                         <Button variant='outline-dark'>MySQL</Button>{' '}
                         <Button variant='outline-dark'>PostgreSQL</Button>{' '}
                         <Button variant='outline-dark'>Docker</Button>{' '}
@@ -55,7 +36,7 @@ function Home() {
                     </Stack>
                 </Col>
             </Row>
-            <Row>
+            <Row className='mb-5'>
                 <Col md={8} className="mx-auto">
                 <h2>Education</h2>
                 <strong>Bachelor of Science in Computer Science</strong> at
@@ -64,6 +45,6 @@ function Home() {
             </Row>
         </Container>
     );
-};
+  }
 
-export default Home;
+  export default Project;
