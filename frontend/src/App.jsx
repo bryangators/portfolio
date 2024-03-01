@@ -8,7 +8,6 @@ import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>

@@ -19,9 +19,9 @@ function Home() {
             <div>
                 <Row className='mb-2 mt-5'>
                     <Col className="mx-auto text-center">
-                        <div className='display-1'>Bryan Kristofferson</div>
+                        <div className='display-1'>BRYAN KRISTOFFERSON</div>
                         <div className='display-6'>
-                            Backend Software Engineer
+                            Software Engineer
                         </div>
                     </Col>
                 </Row>
