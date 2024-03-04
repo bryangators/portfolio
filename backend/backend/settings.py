@@ -85,6 +85,17 @@ DATABASES = {
     }
 }
 
+# This is just a temporary postgres db setup on my localhost for testing purposes only. Credentials are not real...
+DATABASES = {    
+    'default': {        
+        'ENGINE': 'django.db.backends.postgresql',        
+        'NAME': 'portfolio_projects',       
+        'USER': 'postgres',         
+        'PASSWORD': 'root',        
+        'HOST': 'localhost',  # If the database is on the same machine        
+        'PORT': '5432',       # Default PostgreSQL port    
+        }}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
