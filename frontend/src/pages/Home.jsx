@@ -21,7 +21,7 @@ function Home() {
                     <Col className="mx-auto text-center">
                         <div className='display-1'>BRYAN KRISTOFFERSON</div>
                         <div className='display-6'>
-                            Software Engineer
+                            SOFTWARE ENGINEER
                         </div>
                     </Col>
                 </Row>
@@ -34,13 +34,13 @@ function Home() {
                     <Col className='mx-auto text-center'>
                         <div>
                         <Link to="/projects">
-                            <Button variant='outline-dark'>Projects</Button>{' '}
+                            <Button variant='outline-dark'>projects</Button>{' '}
                         </Link>
                         <Link to="/resume">
-                            <Button variant='outline-dark'>Resume</Button>{' '}
+                            <Button variant='outline-dark'>resume</Button>{' '}
                         </Link>
                         <Link to="/contact">
-                            <Button variant='outline-dark'>Contact</Button>{' '}
+                            <Button variant='outline-dark'>contact</Button>{' '}
                         </Link>
                         </div>
                     </Col>                    
