@@ -1,0 +1,9 @@
+.home-page a {
+    color: black;
+    text-decoration: none;
+}
+
+.home-page img {
+    max-width: 150px;
+    margin: 0 auto;
+}
