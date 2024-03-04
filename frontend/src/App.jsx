@@ -9,7 +9,7 @@ import ProjectDisplay from './pages/ProjectDisplay'
 
 function App() {
   return (
-    <div>
+    <div className='font-monospace'>
       <BrowserRouter>
       <header>
         <NavbarComponent></NavbarComponent>

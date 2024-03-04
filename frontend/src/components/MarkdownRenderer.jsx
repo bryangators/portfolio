@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Markdown from 'react-markdown';
 
+// Renders markdown with syntax highlighting for code
 function MarkdownRenderer({ markdown }) {
   return (
     <Markdown
