@@ -1,4 +1,3 @@
-import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavbarComponent from './Navbar';
 import Home from './pages/Home';
@@ -7,24 +6,29 @@ import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 import ProjectDisplay from './pages/ProjectDisplay'
 import AddProject from './pages/AddProject';
+import LoginForm from './pages/LoginForm';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <div className='font-monospace'>
       <BrowserRouter>
-      <header>
-        <NavbarComponent></NavbarComponent>
-      </header>
-      <main>
-      <Routes>
-          <Route exact path="/" Component={Home} />
-          <Route path="/projects" Component={Projects} />
-          <Route path='/projects/:id' Component={ProjectDisplay} />
-          <Route path='/admin' Component={AddProject} />
-          <Route path="/resume" Component={Resume} />
-          <Route path="/contact" Component={Contact} />
-      </Routes>
-      </main>
+        <header>
+          <NavbarComponent></NavbarComponent>
+        </header>
+        <main>
+        <Routes>
+            <Route exact path="/" Component={Home} />
+            <Route path="/projects" Component={Projects} />
+            <Route path='/projects/:id' Component={ProjectDisplay} />
+            <Route path="/resume" Component={Resume} />
+            <Route path="/contact" Component={Contact} />
+            <Route path="/login" Component={LoginForm} />
+            <Route Component={ProtectedRoute}>
+              <Route path="/admin" Component={AddProject} /> 
+            </Route> 
+        </Routes>
+        </main>
       </BrowserRouter>
     </div>
   );

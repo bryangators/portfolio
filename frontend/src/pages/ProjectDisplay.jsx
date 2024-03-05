@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import useFetchApi from '../api/useFetchApi';
 import Project from '../components/Project';
@@ -7,7 +6,7 @@ import Project from '../components/Project';
 function ProjectDisplay() {
     const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
     const {id} = useParams();
-    console.log(id);
+    
     const { data, isLoading, error } = useFetchApi(apiUrl + `/api/project/${id}`);
 
     if (isLoading) return <div>Loading...</div>;

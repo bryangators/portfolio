@@ -13,7 +13,7 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies 
                 <Card.Img src={imageUrl || DEFAULT_PROJECT_IMAGE_URL} 
                         className="mx-auto" 
                         variant="top" 
-                        style={{width: '10rem'}}/>
+                        style={{width: '100%'}}/>
                 <Card.Body>                
                     <Card.Text className="text-start">
                         {short_desc}
