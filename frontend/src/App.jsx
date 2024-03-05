@@ -6,6 +6,7 @@ import Projects from './pages/Projects'
 import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 import ProjectDisplay from './pages/ProjectDisplay'
+import AddProject from './pages/AddProject';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" Component={Home} />
           <Route path="/projects" Component={Projects} />
           <Route path='/projects/:id' Component={ProjectDisplay} />
+          <Route path='/admin' Component={AddProject} />
           <Route path="/resume" Component={Resume} />
           <Route path="/contact" Component={Contact} />
       </Routes>

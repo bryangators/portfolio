@@ -1,40 +1,21 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import MarkdownRenderer from '../components/MarkdownRenderer';
-
-const title = 'Project Title'
-const markdown = `
-#### Here is some HTML code:
-
-~~~html
-<Container className='mt-5 mx-auto'>
-    <h1 className='mt-5 mb-5'>
-        {title}
-    </h1>
-    <MarkdownRenderer markdown={markdown}/>
-</Container>
-~~~
-
-##### Here is some JavaScript code:
-
-~~~javascript
-if (true) {
-    console.log("hello");
-}
-~~~
-
-`
+import useFetchApi from '../api/useFetchApi';
+import Project from '../components/Project';
 
 function ProjectDisplay() {
-  return (
-    <Container className='mt-5 mx-auto'>
-        <h1 className='mt-5 mb-5'>
-            {title}
-        </h1>
-        <MarkdownRenderer markdown={markdown}/>
-    </Container>    
-  );
-}
+    const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
+    const {id} = useParams();
+    console.log(id);
+    const { data, isLoading, error } = useFetchApi(apiUrl + `/api/project/${id}`);
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>
+
+    return (
+        <Project title={data.title} full_desc={data.full_desc}></Project>
+    );
+}                                                                                                       
 
 export default ProjectDisplay;

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-import useFetchApi from '../utils/useFetchApi';
+import useFetchApi from '../api/useFetchApi';
 import { Link } from 'react-router-dom';
 import './Home.css'
-import { useState, useEffect } from 'react';
 
 function Home() {
     // const apiUrl = import.meta.env.VITE_API_BASE_URL;

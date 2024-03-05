@@ -13,6 +13,7 @@ function useFetchApi(url) {
             throw new Error('Fetch failed!');
           }
           const data = await response.json();
+          console.log(data);
           setData(data);
         } catch (error) {
           setError(error);

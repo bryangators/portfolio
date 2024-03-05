@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import './ProjectCard.css'
 
 
-function ProjectCard({ id, title, content, imageUrl, languages, technologies }) {
+function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies }) {
     const DEFAULT_PROJECT_IMAGE_URL = 'src/assets/cloud-computing.png'
     return (  
         <Link className="project-card" to={`${id}`}>
@@ -16,7 +16,7 @@ function ProjectCard({ id, title, content, imageUrl, languages, technologies }) 
                         style={{width: '10rem'}}/>
                 <Card.Body>                
                     <Card.Text className="text-start">
-                        {content}
+                        {short_desc}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className="text-muted">
