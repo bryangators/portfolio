@@ -10,6 +10,11 @@ class ProjectDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'title', 'full_desc', 'date')
+        
+class FullProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = "__all__"
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:

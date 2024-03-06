@@ -1,12 +1,12 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState, useEffect } from 'react';
 import { Button, Container, Form, Row, Col, Badge } from 'react-bootstrap';
 import { TagsInput } from "react-tag-input-component"
 import Project from './Project';
 import ProjectCard from './ProjectCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function AddProjectForm() {
+function AddUpdateProjectForm() {
     const [formData, setFormData] = useState({
         title: '',
         date: '',
@@ -22,14 +22,33 @@ function AddProjectForm() {
     const [showProjectPreview, setShowProjectPreview] = useState(false);
     const [showProjectCard, setShowProjectCard] = useState(false);
     const navigate = useNavigate();
+    const [isEditing, setIsEditing] = useState(false);
+    const { projectId } = useParams();
+    const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT
 
+    useEffect(() => {
+        if (projectId) {
+          setIsEditing(true);
+          const getProjectDataUrl = apiUrl + `/api/project/${projectId}?mode=full`
+
+          axios.get(getProjectDataUrl).then((response) => {
+            const projectData = response.data;
+            
+            const defaultFileName = projectData.full_desc ? 'existing_markdown.md' : '';
+
+            setFormData((prevData) => ({
+                ...prevData,
+                selectedFileName: defaultFileName, // Set default filename
+                ...projectData, // Spread the rest of the projectData
+            }));
+          });
+        }
+      }, [projectId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        console.log("submitting");
         try {
-            const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT + '/api/add_project/';
-
             const token = localStorage.getItem('access_token');
 
             const headers = {
@@ -47,10 +66,14 @@ function AddProjectForm() {
                 technologies: formData.technologies,
             };
 
-            await axios.post(apiUrl, requestData, { headers });
+            if (isEditing) {
+                await axios.put(apiUrl + `/api/update_project/${projectId}/`, requestData, { headers });
+            } else {
+                await axios.post(apiUrl + '/api/add_project/', requestData, { headers });
+            }
 
             // Navigate to projects page upon successful form submission
-            navigate("/projects");
+            navigate("/admin");
 
         } catch (error) {
             console.log()
@@ -148,7 +171,9 @@ function AddProjectForm() {
                     </Container>
                 ) : (
                     <Form onSubmit={handleSubmit} className='text-start'>
-                        <h1 className='text-center mb-5'>Add Project</h1>
+                        <h1 className='text-center mb-5'>
+                            {isEditing ? ( <span>Update</span> ) : ( <span>Add</span> )} Project
+                        </h1>
                         <Row>
                             <Col xs={6}>
                                 <Form.Group className="mb-3" controlId="formTitle">
@@ -221,7 +246,7 @@ function AddProjectForm() {
                             </Col>
                         </Row>
                         <Button variant="outline-dark" type="submit">
-                            Add Project
+                            {isEditing ? ( <span>Update</span> ) : ( <span>Add</span> )} Project
                         </Button>
                         <Button variant="outline-success" className='m-2' onClick={() => setShowProjectPreview(true)}>
                             Preview Project Display
@@ -235,4 +260,4 @@ function AddProjectForm() {
       );
 }
 
-export default AddProjectForm;
+export default AddUpdateProjectForm;

@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, login
 from .models import Project
-from .serializers import ShortProjectDisplaySerializer, ProjectDisplaySerializer, UserSerializer, ProjectSerializer 
+from .serializers import ShortProjectDisplaySerializer, ProjectDisplaySerializer, UserSerializer, ProjectSerializer, FullProjectSerializer
 import logging
 
 logger = logging.getLogger(__name__)
@@ -23,9 +23,16 @@ def project_preview_view(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def project_detail_view(request, project_id):
+    mode = request.query_params.get('mode', 'default_value')
+    
     try:
         project = get_object_or_404(Project, id=project_id)
-        serializer = ProjectDisplaySerializer(project)
+        
+        if mode == 'full':
+            serializer = FullProjectSerializer(project)
+        else:
+            serializer = ProjectDisplaySerializer(project)
+            
         return Response(serializer.data)
     except Project.DoesNotExist:
         return Response({'message': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
@@ -74,5 +81,24 @@ def add_project_view(request):
         else:
             return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        print(str(e))
         return Response({'error': str(e), 'data': request.data}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_project_view(request, project_id):
+    try:
+        # Retrieve the existing project instance
+        project = get_object_or_404(Project, id=project_id)
+
+        serializer = ProjectSerializer(instance=project, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            # Save the updated project
+            serializer.save()
+            return Response({'message': 'Project updated successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        print(str(e))
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

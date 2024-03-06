@@ -5,9 +5,10 @@ import Projects from './pages/Projects'
 import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 import ProjectDisplay from './pages/ProjectDisplay'
-import AddProject from './pages/AddProject';
 import LoginForm from './pages/LoginForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import Admin from './pages/Admin'
+import AddUpdatePoject from './pages/AddUpdateProject'
 
 function App() {
   return (
@@ -25,8 +26,14 @@ function App() {
             <Route path="/contact" Component={Contact} />
             <Route path="/login" Component={LoginForm} />
             <Route Component={ProtectedRoute}>
-              <Route path="/admin" Component={AddProject} /> 
+              <Route path="/admin" Component={Admin} /> 
             </Route> 
+            <Route Component={ProtectedRoute}>
+              <Route path='admin/add/' Component={AddUpdatePoject} />
+            </Route>
+            <Route Component={ProtectedRoute}>
+              <Route path="admin/edit/:projectId" Component={AddUpdatePoject} />
+            </Route>
         </Routes>
         </main>
       </BrowserRouter>

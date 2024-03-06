@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import AddProjectForm from '../components/AddProjectForm';
+import AddProjectForm from '../components/AddUpdateProjectForm';
 
-function AddProject() {
+function AddUpdatePoject() {
 
     return (
         <Container className='mt-5 mx-auto'>   
@@ -11,4 +11,4 @@ function AddProject() {
     );
 }                                                                                                       
 
-export default AddProject;
+export default AddUpdatePoject;
