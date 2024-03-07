@@ -7,7 +7,7 @@ function ProjectDisplay() {
     const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
     const {id} = useParams();
     
-    const { data, isLoading, error } = useFetchApi(apiUrl + `/api/project/${id}`);
+    const { data, isLoading, error } = useFetchApi(apiUrl + `/project/${id}`);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>

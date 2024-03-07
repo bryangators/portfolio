@@ -1,8 +1,10 @@
 import React from "react";
+import axios from "axios";
 import { Badge, Card,} from "react-bootstrap";
-import './ProjectCard.css'
 import ValidateToken from "../api/validateToken";
 import { useNavigate } from "react-router-dom";
+import './ProjectCard.css'
+import ToastNotification from '../utils/ToastNotification';
 
 
 function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode }) {
@@ -17,8 +19,27 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
         }
     }
 
-    const handleDelete = (e) => {
-        console.log("delete");
+    const handleDelete = async (event) => {
+        event.preventDefault();
+
+        const deleteUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT + `/project/delete/${id}/`;
+
+        try {
+            const token = localStorage.getItem('access_token');
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+
+            await axios.delete(deleteUrl, { headers });    
+                        
+            ToastNotification.success(`Successfully deleted ${title} project!`);  
+            // Navigate to projects page upon successful form submission
+            navigate("/admin");         
+        } catch (error) {
+            ToastNotification.error("Something went wrong!");
+        }
     }
 
     const DEFAULT_PROJECT_IMAGE_URL = 'src/assets/cloud-computing.png'
@@ -36,7 +57,7 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
             <span onClick={handleDelete}>
               <i className="bi bi-trash3 text-danger"></i>
             </span>
-          </div>
+            </div>
             )}      
             <Card.Header><Card.Title> {title} </Card.Title></Card.Header>
             <Card.Img src={imageUrl || DEFAULT_PROJECT_IMAGE_URL} 
@@ -59,7 +80,7 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
                     <Badge key={idx} className="me-1" bg="success">{technology}</Badge>
                 ))}
                 </div>
-            </Card.Footer>
+            </Card.Footer>            
         </Card>
     );
 }

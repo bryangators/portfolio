@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -14,14 +13,13 @@ const ValidateToken = () => {
 
             if (token) {
                 try {
-                    const response = await axios.get(apiUrl + '/api/verify_token/', {
+                    const response = await axios.get(apiUrl + '/verify_token/', {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     });
                     setIsLoggedIn(true);
-                } catch (error) {
-                    console.error(error); 
+                } catch (error) { 
                     setIsLoggedIn(false);
                 } finally {
                     setIsLoading(false);

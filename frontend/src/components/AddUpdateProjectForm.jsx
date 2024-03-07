@@ -5,6 +5,7 @@ import Project from './Project';
 import ProjectCard from './ProjectCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import ToastNotification from '../utils/ToastNotification';
 
 function AddUpdateProjectForm() {
     const [formData, setFormData] = useState({
@@ -29,17 +30,20 @@ function AddUpdateProjectForm() {
     useEffect(() => {
         if (projectId) {
           setIsEditing(true);
-          const getProjectDataUrl = apiUrl + `/api/project/${projectId}?mode=full`
+          const getProjectDataUrl = apiUrl + `/project/${projectId}?mode=full`
 
           axios.get(getProjectDataUrl).then((response) => {
             const projectData = response.data;
             
             const defaultFileName = projectData.full_desc ? 'existing_markdown.md' : '';
+            
+            const formattedDate = new Date(projectData.date).toISOString().split('T')[0];
 
             setFormData((prevData) => ({
                 ...prevData,
                 selectedFileName: defaultFileName, // Set default filename
-                ...projectData, // Spread the rest of the projectData
+                ...projectData,
+                date: formattedDate,
             }));
           });
         }
@@ -47,7 +51,7 @@ function AddUpdateProjectForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("submitting");
+        
         try {
             const token = localStorage.getItem('access_token');
 
@@ -67,10 +71,12 @@ function AddUpdateProjectForm() {
             };
 
             if (isEditing) {
-                await axios.put(apiUrl + `/api/update_project/${projectId}/`, requestData, { headers });
+                await axios.put(apiUrl + `/project/update/${projectId}/`, requestData, { headers });
             } else {
-                await axios.post(apiUrl + '/api/add_project/', requestData, { headers });
+                await axios.post(apiUrl + '/project/add/', requestData, { headers });
             }
+
+            ToastNotification.success("Successfully added project");
 
             // Navigate to projects page upon successful form submission
             navigate("/admin");

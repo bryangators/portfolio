@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 function Projects() {
   const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
   
-  const { data, isLoading, error } = useFetchApi(apiUrl + '/api/projects');
+  const { data, isLoading, error } = useFetchApi(apiUrl + '/projects');
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

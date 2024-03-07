@@ -19,7 +19,6 @@ def project_preview_view(request):
     serializer = ShortProjectDisplaySerializer(projects, many=True)
     return Response(serializer.data)
 
-# Using @api_view 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def project_detail_view(request, project_id):
@@ -37,33 +36,6 @@ def project_detail_view(request, project_id):
     except Project.DoesNotExist:
         return Response({'message': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
         
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login_view(request):
-    # Extract username and password from the request data
-    username = request.data.get('username')
-    password = request.data.get('password')
-
-    # Authenticate the user
-    user = authenticate(request, username=username, password=password) 
-
-    if user is not None:
-        login(request, user)
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            'user': UserSerializer(user).data
-        })
-    else:
-        return Response({'error': 'Invalid credentials'}, status=400)
-    
-@api_view(['GET'])
-@authentication_classes([JWTAuthentication])
-@permission_classes([IsAuthenticated])
-def verify_token(request):
-    return Response({'message': 'Token is valid'})
-
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
@@ -100,5 +72,45 @@ def update_project_view(request, project_id):
         else:
             return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        print(str(e))
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def project_delete_view(request, project_id):
+    try:
+        project = get_object_or_404(Project, id=project_id)
+        project.delete()
+        return Response({'message': 'Project deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except Exception as e:
+        print(str(e))
+        return Response({'message': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+# Views for Login and Authorization  
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login_view(request):
+    # Extract username and password from the request data
+    username = request.data.get('username')
+    password = request.data.get('password')
+
+    # Authenticate the user
+    user = authenticate(request, username=username, password=password) 
+
+    if user is not None:
+        login(request, user)
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'user': UserSerializer(user).data
+        })
+    else:
+        return Response({'error': 'Invalid credentials'}, status=400)
+    
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def verify_token(request):
+    return Response({'message': 'Token is valid'})

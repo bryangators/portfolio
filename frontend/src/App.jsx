@@ -9,6 +9,8 @@ import LoginForm from './pages/LoginForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import Admin from './pages/Admin'
 import AddUpdatePoject from './pages/AddUpdateProject'
+import ToastNotification from './utils/ToastNotification';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
               <Route path="admin/edit/:projectId" Component={AddUpdatePoject} />
             </Route>
         </Routes>
+        <ToastNotification></ToastNotification>
         </main>
       </BrowserRouter>
     </div>
