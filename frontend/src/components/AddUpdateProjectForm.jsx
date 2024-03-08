@@ -1,10 +1,15 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState, useEffect } from 'react';
 import { Button, Container, Form, Row, Col, Badge } from 'react-bootstrap';
 import { TagsInput } from "react-tag-input-component"
 import Project from './Project';
 import ProjectCard from './ProjectCard';
+import { useNavigate, useParams } from 'react-router-dom';
+import ToastNotification from '../utils/ToastNotification';
+import { fetchGet, fetchPost, fetchPut } from '../api/apiService';
+import axios from 'axios';
+import { API_BASE_URL } from '../api/apiService';
 
-function AddProjectForm() {
+function AddUpdateProjectForm() {
     const [formData, setFormData] = useState({
         title: '',
         date: '',
@@ -12,16 +17,80 @@ function AddProjectForm() {
         display_img_path: '',
         full_desc: '',
         languages: [],
-        technologies: []
+        technologies: [],
+        selectedFile: null,
+        selectedFileName: ''
     });   
 
     const [showProjectPreview, setShowProjectPreview] = useState(false);
     const [showProjectCard, setShowProjectCard] = useState(false);
+    const navigate = useNavigate();
+    const [isEditing, setIsEditing] = useState(false);
+    const { projectId } = useParams();
 
+    async function fetchProjectData() {
+        if (projectId) {
+            setIsEditing(true);
+            const projectUrl = `/project/${projectId}?mode=full`
+            
+            try {
+                const projectData = await fetchGet(projectUrl);            
+              
+                const defaultFileName = projectData.full_desc ? 'existing_markdown.md' : '';
+                
+                const formattedDate = new Date(projectData.date).toISOString().split('T')[0];
+    
+                setFormData((prevData) => ({
+                    ...prevData,
+                    selectedFileName: defaultFileName, // Set default filename
+                    ...projectData,
+                    date: formattedDate,
+                }));
+            } catch (error) {
+                ToastNotification.error(error);
+            }
+        }
+    }
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        fetchProjectData();        
+    }, []);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Logic to send the form data to your backend API using fetch or a library like axios
+        
+        try {
+            const token = localStorage.getItem('access_token');
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+
+            const requestData = {
+                title: formData.title,
+                date: formData.date,
+                short_desc: formData.short_desc,
+                display_img_path: formData.display_img_path,
+                full_desc: formData.full_desc,
+                languages: formData.languages,
+                technologies: formData.technologies,
+            };
+
+            if (isEditing) {
+                await axios.put(API_BASE_URL + `/project/update/${projectId}/`, requestData, { headers });
+            } else {
+                await axios.post(API_BASE_URL + '/project/add/', requestData, { headers });
+            }
+
+            ToastNotification.success("Successfully added project");
+
+            // Navigate to projects page upon successful form submission
+            navigate("/admin");
+
+        } catch (error) {
+            ToastNotification.error(error);
+        }
     };
 
     const handleChange = (event) => {
@@ -33,24 +102,27 @@ function AddProjectForm() {
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0];
-    
+
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
                 const markdownText = event.target.result;
-    
-                setFormData({
-                    ...formData,
-                    full_desc: markdownText
-                });
+
+                setFormData((prevData) => ({
+                    ...prevData,
+                    full_desc: markdownText,
+                    selectedFile: file,
+                    selectedFileName: file.name,
+                }));
             };
             reader.readAsText(file);
         } else {
-            // Clear full_desc if the file is not selected
-            setFormData({
-                ...formData,
-                full_desc: ''
-            });
+            setFormData((prevData) => ({
+                ...prevData,
+                full_desc: '',
+                selectedFile: null,
+                selectedFileName: '',
+            }));
         }
     };
 
@@ -67,10 +139,21 @@ function AddProjectForm() {
             technologies: newTechnologies
         });
     };
-    
-    const handleImageChange = (event) => {
-        // Logic to handle the uploaded image file (more on this later)
-    }
+
+    // Option to change the file
+    const handleChangeFile = () => {
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput) {
+            fileInput.value = ''; // Reset the file input value
+        }
+
+        setFormData((prevData) => ({
+            ...prevData,
+            full_desc: '',
+            selectedFile: null,
+            selectedFileName: '', // Clear the selected file name
+        }));
+    };
 
     return (
         <Container className='p-3'>
@@ -86,7 +169,7 @@ function AddProjectForm() {
                             <ProjectCard 
                                 title={formData.title} 
                                 short_desc={formData.short_desc} 
-                                imageUrl={formData.imageUrl} 
+                                imageUrl={formData.display_img_path} 
                                 languages={formData.languages} 
                                 technologies={formData.technologies}
                                 >
@@ -101,7 +184,9 @@ function AddProjectForm() {
                     </Container>
                 ) : (
                     <Form onSubmit={handleSubmit} className='text-start'>
-                        <h1 className='text-center mb-5'>Add Project</h1>
+                        <h1 className='text-center mb-5'>
+                            {isEditing ? ( <span>Update</span> ) : ( <span>Add</span> )} Project
+                        </h1>
                         <Row>
                             <Col xs={6}>
                                 <Form.Group className="mb-3" controlId="formTitle">
@@ -120,7 +205,7 @@ function AddProjectForm() {
                             <Col>
                                 <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Display Image</Form.Label>
-                                <Form.Control type="text" name="display_img" placeholder="Enter image url" value={formData.imageUrl} onChange={handleChange} />
+                                <Form.Control type="text" name="display_img_path" placeholder="Enter image url" value={formData.display_img_path} onChange={handleChange} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -135,8 +220,22 @@ function AddProjectForm() {
                         <Row>
                             {/* Full Description */}
                             <Form.Group className="mb-3" controlId="formFullDesc">
-                            <Form.Label>Full Description Markdown</Form.Label>
-                            <Form.Control type="file" accept='.md' name="full_desc" value={formData.full_desc} onChange={handleFileUpload} />
+                                <Form.Label>Full Description Markdown</Form.Label>
+                                {!formData.selectedFileName ? (
+                                    <Form.Control
+                                        type="file"
+                                        accept=".md"
+                                        name="full_desc"
+                                        onChange={handleFileUpload}
+                                    />
+                                ) : (
+                                    <p>
+                                        Selected File: {formData.selectedFileName}
+                                        <Button variant="link" onClick={handleChangeFile}>
+                                            Change File
+                                        </Button>
+                                    </p>
+                                )}
                             </Form.Group>
                         </Row>
                         <Row>
@@ -160,7 +259,7 @@ function AddProjectForm() {
                             </Col>
                         </Row>
                         <Button variant="outline-dark" type="submit">
-                            Add Project
+                            {isEditing ? ( <span>Update</span> ) : ( <span>Add</span> )} Project
                         </Button>
                         <Button variant="outline-success" className='m-2' onClick={() => setShowProjectPreview(true)}>
                             Preview Project Display
@@ -174,4 +273,4 @@ function AddProjectForm() {
       );
 }
 
-export default AddProjectForm;
+export default AddUpdateProjectForm;

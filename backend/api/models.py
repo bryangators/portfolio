@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import AbstractUser
 
 class Project(models.Model):
     id = models.AutoField(primary_key=True)
@@ -10,3 +11,9 @@ class Project(models.Model):
     date = models.DateTimeField(auto_now_add=True)  
     languages = ArrayField(models.CharField(max_length=50), blank=True, null=True) 
     technologies = ArrayField(models.CharField(max_length=50), blank=True, null=True) 
+    
+    # models.py
+
+class CustomUser(AbstractUser):
+    # Add any additional fields you need
+    pass
