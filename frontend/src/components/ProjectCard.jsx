@@ -7,7 +7,7 @@ import './ProjectCard.css'
 import ToastNotification from '../utils/ToastNotification';
 
 
-function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode }) {
+function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode, onDelete }) {
     const { isLoggedIn, isLoading } = ValidateToken();
     const navigate = useNavigate();
 
@@ -35,8 +35,8 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
             await axios.delete(deleteUrl, { headers });    
                         
             ToastNotification.success(`Successfully deleted ${title} project!`);  
-            // Navigate to projects page upon successful form submission
-            navigate("/admin");         
+            
+            onDelete();       
         } catch (error) {
             ToastNotification.error("Something went wrong!");
         }
