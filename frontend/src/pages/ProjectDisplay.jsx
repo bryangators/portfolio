@@ -8,13 +8,12 @@ import axios from 'axios';
 function ProjectDisplay() {
     const {id} = useParams();
     const [data, setData] = useState([]);
-    console.log("here");
+   
     async function fetchData() {
         try {
             const result = await axios.get(API_BASE_URL + `/project/${id}`);
             setData(result.data);
         } catch (error) {
-            console.log(error);
             ToastNotification.error(error);
         }
     }
