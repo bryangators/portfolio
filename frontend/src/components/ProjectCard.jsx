@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { Badge, Card,} from "react-bootstrap";
 import ValidateToken from "../api/validateToken";
 import { useNavigate } from "react-router-dom";
-import './ProjectCard.css'
 import ToastNotification from '../utils/ToastNotification';
-import { API_BASE_URL } from "../api/apiService";
+import { fetchDelete } from "../api/apiService";
+import './ProjectCard.css'
 
 
 function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode, onDelete }) {
@@ -24,17 +23,8 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
     const handleDelete = async (event) => {
         event.preventDefault();
 
-        const deleteUrl = API_BASE_URL + `/project/delete/${id}/`;
-
         try {
-            const token = localStorage.getItem('access_token');
-
-            const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            };
-
-            await axios.delete(deleteUrl, { headers });    
+            await fetchDelete(`/project/delete/${id}/`, true);    
                         
             ToastNotification.success(`Successfully deleted ${title} project!`);  
             

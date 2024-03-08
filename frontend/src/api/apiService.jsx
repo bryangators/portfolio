@@ -3,19 +3,27 @@ import axios from 'axios';
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;   // Replace with your API base URL
 
-const apiService = axios.create({
-    baseURL: API_BASE_URL,
-});
+const getHeaders = () => {
+    const token = localStorage.getItem('access_token');
 
-export const fetchGet = async (endpoint, headers = {}) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+
+    return headers;
+}
+
+export const fetchGet = async (endpoint, requiresAuth = false) => {
+    const url = API_BASE_URL + endpoint;
     try {
-        const options = { headers };
-        
-        if (headers && headers.Authorization) {
-            options.withCredentials = true;
-        }
+        let response;
 
-        const response = await apiService.get(endpoint, options)  
+        if (requiresAuth) {
+            response = await axios.get(url, {headers: getHeaders()})  
+        } else {
+            response = await axios.get(url)
+        }
 
         return response.data; 
     } catch (error) {
@@ -23,15 +31,16 @@ export const fetchGet = async (endpoint, headers = {}) => {
     }
 };
 
-export const fetchPost = async (endpoint, data, headers = {}) => {
+export const fetchPost = async (endpoint, data, requiresAuth = false) => {
+    const url = API_BASE_URL + endpoint;
     try {
-        const options = { headers };
-        
-        if (headers && headers.Authorization) {
-            options.withCredentials = true;
-        }
+        let response;
 
-        const response = await apiService.post(endpoint, data, options)   
+        if (requiresAuth) {
+            response = await axios.post(url, data, {headers: getHeaders()})  
+        } else {
+            response = await axios.post(url, data)
+        }
 
         return response;
     } catch (error) {
@@ -39,35 +48,37 @@ export const fetchPost = async (endpoint, data, headers = {}) => {
     }
 };
 
-export const fetchPut = async (endpoint, data, headers = {}) => {  
+export const fetchPut = async (endpoint, data, requiresAuth = false) => {
+    const url = API_BASE_URL + endpoint;
     try {
-        const options = { headers };
-        
-        if (headers && headers.Authorization) {
-            options.withCredentials = true;
-        }
+        let response;
 
-        const response = await apiService.put(endpoint, data, options)   
+        if (requiresAuth) {
+            response = await axios.put(url, data, {headers: getHeaders()})  
+        } else {
+            response = await axios.put(url, data)
+        }
 
         return response;
     } catch (error) {
         throw error;
-    } 
+    }
 };
 
-export const fetchDelete = async (endpoint, headers = {}) => {
+export const fetchDelete = async (endpoint, requiresAuth = false) => {
+    const url = API_BASE_URL + endpoint;
     try {
-        const options = { headers };
-        
-        if (headers && headers.Authorization) {
-            options.withCredentials = true;
+        let response;
+
+        if (requiresAuth) {
+            response = await axios.delete(url, {headers: getHeaders()})  
+        } else {
+            response = await axios.delete(url)
         }
-        
-        const response = await apiService.delete(endpoint, options)   
 
         return response;
     } catch (error) {
-        throw(error);
+        throw error;
     }
 };
 

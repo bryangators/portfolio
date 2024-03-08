@@ -60,13 +60,6 @@ function AddUpdateProjectForm() {
         event.preventDefault();
         
         try {
-            const token = localStorage.getItem('access_token');
-
-            const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            };
-
             const requestData = {
                 title: formData.title,
                 date: formData.date,
@@ -78,9 +71,9 @@ function AddUpdateProjectForm() {
             };
 
             if (isEditing) {
-                await axios.put(API_BASE_URL + `/project/update/${projectId}/`, requestData, { headers });
+                await fetchPut(`/project/update/${projectId}/`, requestData, true);
             } else {
-                await axios.post(API_BASE_URL + '/project/add/', requestData, { headers });
+                await fetchPost('/project/add/', requestData, true);
             }
 
             ToastNotification.success("Successfully added project");
