@@ -4,8 +4,10 @@ import { TagsInput } from "react-tag-input-component"
 import Project from './Project';
 import ProjectCard from './ProjectCard';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import ToastNotification from '../utils/ToastNotification';
+import { fetchGet, fetchPost, fetchPut } from '../api/apiService';
+import axios from 'axios';
+import { API_BASE_URL } from '../api/apiService';
 
 function AddUpdateProjectForm() {
     const [formData, setFormData] = useState({
@@ -25,29 +27,34 @@ function AddUpdateProjectForm() {
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const { projectId } = useParams();
-    const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT
+
+    async function fetchProjectData() {
+        if (projectId) {
+            setIsEditing(true);
+            const projectUrl = `/project/${projectId}?mode=full`
+            
+            try {
+                const projectData = await fetchGet(projectUrl);            
+              
+                const defaultFileName = projectData.full_desc ? 'existing_markdown.md' : '';
+                
+                const formattedDate = new Date(projectData.date).toISOString().split('T')[0];
+    
+                setFormData((prevData) => ({
+                    ...prevData,
+                    selectedFileName: defaultFileName, // Set default filename
+                    ...projectData,
+                    date: formattedDate,
+                }));
+            } catch (error) {
+                ToastNotification.error(error);
+            }
+        }
+    }
 
     useEffect(() => {
-        if (projectId) {
-          setIsEditing(true);
-          const getProjectDataUrl = apiUrl + `/project/${projectId}?mode=full`
-
-          axios.get(getProjectDataUrl).then((response) => {
-            const projectData = response.data;
-            
-            const defaultFileName = projectData.full_desc ? 'existing_markdown.md' : '';
-            
-            const formattedDate = new Date(projectData.date).toISOString().split('T')[0];
-
-            setFormData((prevData) => ({
-                ...prevData,
-                selectedFileName: defaultFileName, // Set default filename
-                ...projectData,
-                date: formattedDate,
-            }));
-          });
-        }
-      }, [projectId]);
+        fetchProjectData();        
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -71,9 +78,9 @@ function AddUpdateProjectForm() {
             };
 
             if (isEditing) {
-                await axios.put(apiUrl + `/project/update/${projectId}/`, requestData, { headers });
+                await axios.put(API_BASE_URL + `/project/update/${projectId}/`, requestData, { headers });
             } else {
-                await axios.post(apiUrl + '/project/add/', requestData, { headers });
+                await axios.post(API_BASE_URL + '/project/add/', requestData, { headers });
             }
 
             ToastNotification.success("Successfully added project");
@@ -82,7 +89,7 @@ function AddUpdateProjectForm() {
             navigate("/admin");
 
         } catch (error) {
-            console.log()
+            ToastNotification.error(error);
         }
     };
 

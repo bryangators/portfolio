@@ -40,7 +40,6 @@ def project_detail_view(request, project_id):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def add_project_view(request):
-    # Your existing logic for handling the form data and creating a new project
     try:
         print(request.data)
         # Assuming you have a serializer for your project data

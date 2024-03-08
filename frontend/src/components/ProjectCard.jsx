@@ -5,12 +5,14 @@ import ValidateToken from "../api/validateToken";
 import { useNavigate } from "react-router-dom";
 import './ProjectCard.css'
 import ToastNotification from '../utils/ToastNotification';
+import { API_BASE_URL } from "../api/apiService";
 
 
 function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode, onDelete }) {
     const { isLoggedIn, isLoading } = ValidateToken();
     const navigate = useNavigate();
-
+    const DEFAULT_PROJECT_IMAGE_URL = 'src/assets/cloud-computing.png'
+    
     const handleEdit = () => {
         const projectId = id;
 
@@ -22,7 +24,7 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
     const handleDelete = async (event) => {
         event.preventDefault();
 
-        const deleteUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT + `/project/delete/${id}/`;
+        const deleteUrl = API_BASE_URL + `/project/delete/${id}/`;
 
         try {
             const token = localStorage.getItem('access_token');
@@ -36,13 +38,12 @@ function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies,
                         
             ToastNotification.success(`Successfully deleted ${title} project!`);  
             
-            onDelete();       
+            onDelete(id);       
         } catch (error) {
             ToastNotification.error("Something went wrong!");
         }
     }
 
-    const DEFAULT_PROJECT_IMAGE_URL = 'src/assets/cloud-computing.png'
     return (    
         <Card 
             className={`project-card p-0 ${isAdminMode ? 'admin-mode' : ''}`}

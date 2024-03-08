@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { fetchPost } from '../api/apiService';
 
 function LoginForm() {
     const navigate = useNavigate()
@@ -11,10 +11,9 @@ function LoginForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
 
         try {
-        const response = await axios.post(apiUrl + '/login/', {
+        const response = await fetchPost('/login/', {
             username,
             password
         });

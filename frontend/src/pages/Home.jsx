@@ -1,18 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-import useFetchApi from '../api/useFetchApi';
 import { Link } from 'react-router-dom';
 import './Home.css'
 
-function Home() {
-    // const apiUrl = import.meta.env.VITE_API_BASE_URL;
-
-    // const { data, isLoading, error } = useFetchApi(apiUrl + '/api/hello-world');
-
-    // if (isLoading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error.message}</div>;
-
-    
+function Home() {    
     return (
         <Container className="home-page">
             <div>

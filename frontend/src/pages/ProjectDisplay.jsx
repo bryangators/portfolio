@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useFetchApi from '../api/useFetchApi';
+import ToastNotification from '../utils/ToastNotification';
 import Project from '../components/Project';
+import { API_BASE_URL } from '../api/apiService';
+import axios from 'axios';
 
 function ProjectDisplay() {
-    const apiUrl = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;
     const {id} = useParams();
-    
-    const { data, isLoading, error } = useFetchApi(apiUrl + `/project/${id}`);
+    const [data, setData] = useState([]);
+    console.log("here");
+    async function fetchData() {
+        try {
+            const result = await axios.get(API_BASE_URL + `/project/${id}`);
+            setData(result.data);
+        } catch (error) {
+            console.log(error);
+            ToastNotification.error(error);
+        }
+    }
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <Project title={data.title} full_desc={data.full_desc}></Project>
