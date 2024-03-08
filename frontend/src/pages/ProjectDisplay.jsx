@@ -7,13 +7,12 @@ import { fetchGet } from '../api/apiService';
 function ProjectDisplay() {
     const {id} = useParams();
     const [data, setData] = useState([]);
-    
+
     async function fetchData() {
         try {
             const result = await fetchGet(`/project/${id}`);
             setData(result);
         } catch (error) {
-            console.log(error);
             ToastNotification.error(error);
         }
     }
