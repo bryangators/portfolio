@@ -6,8 +6,6 @@ import ProjectCard from './ProjectCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import ToastNotification from '../utils/ToastNotification';
 import { fetchGet, fetchPost, fetchPut } from '../api/apiService';
-import axios from 'axios';
-import { API_BASE_URL } from '../api/apiService';
 
 function AddUpdateProjectForm() {
     const [formData, setFormData] = useState({
