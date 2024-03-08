@@ -1,5 +1,6 @@
 // apiService.js
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;   // Replace with your API base URL
 
@@ -81,4 +82,25 @@ export const fetchDelete = async (endpoint, requiresAuth = false) => {
         throw error;
     }
 };
+
+export const ValidateToken = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); // For loading state
+
+    useEffect(() => {
+        const validateToken = async () => {
+            try {
+                const response = await fetchGet('/verify_token/', true);
+                setIsLoggedIn(true);
+            } catch (error) { 
+                setIsLoggedIn(false);
+            } finally {
+                setIsLoading(false);
+            }            
+        };
+        validateToken();
+    }, []);
+
+    return { isLoggedIn, isLoading };
+}
 

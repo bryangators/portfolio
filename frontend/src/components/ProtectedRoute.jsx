@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import ValidateToken from '../api/validateToken';
+import { ValidateToken } from '../api/apiService';
 
 const ProtectedRoute = () => {
     const { isLoggedIn, isLoading } = ValidateToken();

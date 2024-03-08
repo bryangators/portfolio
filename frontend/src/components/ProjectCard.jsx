@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge, Card,} from "react-bootstrap";
-import ValidateToken from "../api/validateToken";
+import { ValidateToken } from "../api/apiService";
 import { useNavigate } from "react-router-dom";
 import ToastNotification from '../utils/ToastNotification';
 import { fetchDelete } from "../api/apiService";
