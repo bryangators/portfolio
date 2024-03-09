@@ -1,0 +1,7 @@
+Dear {{ name }},
+
+Thank you for reaching out! I have received your message and will be in touch shortly. 
+
+Thanks,
+Bryan Kristofferson
+

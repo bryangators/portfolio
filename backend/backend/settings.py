@@ -11,19 +11,28 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_CONTACT_ALIAS = config('EMAIL_CONTACT_ALIAS')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8@2_bkr33#+q3)=$a$qn-js+tmetx)jnu^dknj+vnfg$+2($*a'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG_MODE')
 
 ALLOWED_HOSTS = []
 
@@ -83,11 +92,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {    
     'default': {        
         'ENGINE': 'django.db.backends.postgresql',        
-        'NAME': 'portfolio_projects',       
-        'USER': 'postgres',         
-        'PASSWORD': 'root',        
-        'HOST': 'localhost',  # If the database is on the same machine        
-        'PORT': '5432',       # Default PostgreSQL port    
+        'NAME': config('DB_NAME'),       
+        'USER': config('DB_USER'),         
+        'PASSWORD': config('DB_PASSWORD'),        
+        'HOST': config('DB_HOST'),        
+        'PORT': config('DB_PORT'),       # Default PostgreSQL port    
         }}
 
 

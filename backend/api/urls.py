@@ -10,5 +10,7 @@ urlpatterns = [
     path('project/delete/<int:project_id>/', views.project_delete_view, name='delete_project'),
     # patterns for login
     path('login/', views.login_view, name='login'),
-    path('verify_token/', views.verify_token, name='verify')
+    path('verify_token/', views.verify_token, name='verify'),
+    #patterns for contact
+    path('contact/', views.contact_form_submission, name='contact')
 ]

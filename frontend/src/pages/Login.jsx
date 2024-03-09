@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchPost } from '../api/apiService';
 
-function LoginForm() {
+function Login() {
     const navigate = useNavigate()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -58,4 +58,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default Login;

@@ -6,11 +6,16 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, login
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from decouple import config
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.conf import settings
+from django.template.loader import render_to_string
 from .models import Project
 from .serializers import ShortProjectDisplaySerializer, ProjectDisplaySerializer, UserSerializer, ProjectSerializer, FullProjectSerializer
-import logging
-
-logger = logging.getLogger(__name__)
     
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -113,3 +118,28 @@ def login_view(request):
 @permission_classes([IsAuthenticated])
 def verify_token(request):
     return Response({'message': 'Token is valid'})
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def contact_form_submission(request):
+    name = request.data.get('name')
+    email = request.data.get('email')
+    message = request.data.get('message')
+    
+    # Email to the contact alias (admin notification)
+    subject_admin = 'New Contact Form Submission'
+    body_admin = render_to_string('email_templates/contact_admin.txt', {  # Using a template
+        'name': name,
+        'email': email,
+        'message': message
+    })
+    recipient_list_admin = [settings.EMAIL_CONTACT_ALIAS]
+    send_mail(subject_admin, body_admin, settings.EMAIL_HOST_USER, recipient_list_admin)
+
+    # Email to the sender (confirmation)
+    subject_sender = 'Thank You for Your Message!'
+    body_sender = render_to_string('email_templates/contact_sender.txt', {'name': name})
+    recipient_list_sender = [email]
+    send_mail(subject_sender, body_sender, settings.EMAIL_HOST_USER, recipient_list_sender)
+
+    return JsonResponse({'success': 'Message sent successfully!'})

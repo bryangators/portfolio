@@ -28,19 +28,19 @@ function Project() {
                     <Stack >
                         <h5>Frontend</h5>
                         <div className='mb-3'>
-                            <Button variant='outline-dark'>HTML</Button>{' '}
-                            <Button variant='outline-dark'>CSS</Button>{' '}
-                            <Button variant='outline-dark'>JavaScript</Button>{' '}
-                            <Button variant='outline-dark'>React</Button>
+                            <Button variant='outline-dark' className='pe-none'>HTML</Button>{' '}
+                            <Button variant='outline-dark' className='pe-none'>CSS</Button>{' '}
+                            <Button variant='outline-dark' className='pe-none'>JavaScript</Button>{' '}
+                            <Button variant='outline-dark' className='pe-none'>React</Button>
                         </div>
                         <h5>Backend</h5>
                         <div>
-                        <Button variant='outline-dark'>Python</Button>{' '}
-                        <Button variant='outline-dark'>Django</Button>{' '}
-                        <Button variant='outline-dark'>C#</Button>{' '}
-                        <Button variant='outline-dark'>.NET</Button>{' '}
-                        <Button variant='outline-dark'>Docker</Button>{' '}
-                        <Button variant='outline-dark'>AWS</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>Python</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>Django</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>C#</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>.NET</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>Docker</Button>{' '}
+                        <Button variant='outline-dark' className='pe-none'>AWS</Button>
                         </div>
                     </Stack>
                 </Col>

@@ -5,7 +5,7 @@ import Projects from './pages/Projects'
 import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 import ProjectDisplay from './pages/ProjectDisplay'
-import LoginForm from './pages/LoginForm';
+import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Admin from './pages/Admin'
 import AddUpdatePoject from './pages/AddUpdateProject'
@@ -26,7 +26,7 @@ function App() {
             <Route path='/projects/:id' Component={ProjectDisplay} />
             <Route path="/resume" Component={Resume} />
             <Route path="/contact" Component={Contact} />
-            <Route path="/login" Component={LoginForm} />
+            <Route path="/login" Component={Login} />
             <Route Component={ProtectedRoute}>
               <Route path="/admin" Component={Admin} /> 
             </Route> 
