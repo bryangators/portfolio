@@ -96,7 +96,7 @@ DATABASES = {
         'USER': config('DB_USER'),         
         'PASSWORD': config('DB_PASSWORD'),        
         'HOST': config('DB_HOST'),        
-        'PORT': config('DB_PORT'),       # Default PostgreSQL port    
+        'PORT': config('DB_PORT', cast=int),       # Default PostgreSQL port    
         }}
 
 
@@ -141,10 +141,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Replace with the actual origin of your frontend
-    # Add other allowed origins if needed
-]
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS').split(" ")
 
 CORS_ORIGIN_ALLOW_ALL = False
 
