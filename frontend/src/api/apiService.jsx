@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_DEVELOPMENT;   // Replace with your API base URL
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;   // Replace with your API base URL
 
 const getHeaders = () => {
     const token = localStorage.getItem('access_token');
@@ -25,7 +25,7 @@ export const fetchGet = async (endpoint, requiresAuth = false) => {
         } else {
             response = await axios.get(url)
         }
-
+        
         return response.data; 
     } catch (error) {
         throw error;
