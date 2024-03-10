@@ -17,7 +17,7 @@ function Home() {
                 </Row>
                 <Row className='mb-2 mt-5'>
                     <Col md={6} className="mx-auto text-center">
-                    <Image src="/src/assets/cloud-computing.png"></Image>
+                    <Image src="/assets/cloud-computing.png"></Image>
                     </Col>
                 </Row>
                 <Row className='mt-5'>
