@@ -1,5 +1,5 @@
 # Stage 1: Build the React app
-FROM node:lts as builder
+FROM node:latest as builder
 
 # create working dir
 WORKDIR /app
