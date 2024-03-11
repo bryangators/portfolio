@@ -24,12 +24,10 @@ services:
     ports:
       - "5432:5432"
   # react/nginx
-  frontend: 
-    build: 
+  frontend:
+    build:
       context: frontend
       dockerfile: Dockerfile
-      args:
-        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     ports:
       - '80:80'
     depends_on:
