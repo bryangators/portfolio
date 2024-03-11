@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-# django backend api
+# django
   api: 
     build:
       context: backend
@@ -14,7 +14,7 @@ services:
           gunicorn CoreRoot.wsgi:application --bind 0.0.0.0:5000"
     depends_on:
       - db
-  # postgres db
+  # postgres
   db:
     image: postgres:latest
     env_file:
@@ -23,7 +23,7 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  # reactr app
+  # react/nginx
   frontend: 
     build: 
       context: frontend
