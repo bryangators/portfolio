@@ -4,6 +4,9 @@ FROM node:latest as builder
 # create working dir
 WORKDIR /app
 
+# Set the npm registry to use HTTP
+RUN npm config set registry http://registry.npmjs.org/
+
 # install dependencies
 COPY package*.json ./
 RUN npm install
