@@ -7,6 +7,9 @@ WORKDIR /app
 # Set the npm registry to use HTTP
 RUN npm config set registry http://registry.npmjs.org/
 
+# Set the maximum heap size for Node.js
+ENV NODE_OPTIONS="--max_old_space_size=4096"
+
 # install dependencies
 COPY package*.json ./
 RUN npm install
