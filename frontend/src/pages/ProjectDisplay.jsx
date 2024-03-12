@@ -22,7 +22,7 @@ function ProjectDisplay() {
     }, []);
 
     return (
-        <Project title={data.title} full_desc={data.full_desc}></Project>
+        <Project title={data.title} full_desc={data.full_desc} date={data.date}></Project>
     );
 }                                                                                                       
 

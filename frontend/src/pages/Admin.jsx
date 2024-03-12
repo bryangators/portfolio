@@ -45,7 +45,7 @@ function Admin() {
                   id={project.id}
                   title={project.title}
                   content={project.short_desc}
-                  imageUrl={project.imageUrl}
+                  imageUrl={project.display_img_path}
                   languages={project.languages}
                   technologies={project.technologies}
                   isAdminMode={true}
