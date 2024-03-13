@@ -4,6 +4,20 @@
 }
 
 .home-page img {
-    max-width: 150px;
+    max-width: 300px;
     margin: 0 auto;
+}
+
+.home-page h3 {
+    font-weight: bold;
+}
+
+.home-page .home-desc {
+    width:50% !important;
+ }
+ 
+@media (max-width: 768px) {
+    .home-page .home-desc {
+       width:75% !important;
+    }
 }

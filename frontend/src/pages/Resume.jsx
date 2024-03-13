@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Stack, Button } from 'react-bootstrap';
+import { Container, Row, Col, Stack, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Project() {
@@ -8,18 +8,30 @@ function Project() {
             <Row className='mt-5'>
                 <Col md={8} className="mx-auto">
                     <h2>Experience</h2>
-                    <strong>Software Engineer</strong> at <Link to={"https://www.dataannotation.tech/"} target="_blank" rel="noopener noreferrer">Data Annotation Tech</Link> (2024-Present)
+                    <strong>Correctional Systems Officer</strong> at <Link to={"https://www.bop.gov/"} target="_blank" rel="noopener noreferrer">Federal Bureau of Prisons</Link> (2010 - Present)
                     <ul>
-                        <li>Work with AI chatbots in order to measure their progress, as well as write and evaluate code.</li>
-                        <li>Evaluate code quality produced by AI models for correctness and performance.</li>
+                        <li>Accomplishments: SORT Operator, STARS Leadership Graduate, Officer of the Quarter, Sustained Superior Performance, Quality Step Increase, Contraband Officer of the Month, Time Off Award</li>
+                        <li style={{listStyle: 'none'}}>
+                            {['Security Clearance', 'Leadership', 'Teamwork', 'Problem-Solving', 'Interpersonal Skills'].map((skill, index) => (
+                                <Badge key={index} pill bg="dark" className='me-2 mb-2'>{skill}</Badge>
+                            ))}
+                            
+                        </li>
                     </ul>
                     <strong>Software Engineer</strong> at <Link to={"https://www.iln.app/"} target="_blank" rel="noopener noreferrer">ILN</Link> (2023-2024)
                     <ul>
+                        <li>Developed application's chat service in .NET, leveraging Entity Framework to architect and optimize intricate queries.</li>
                         <li>Enhanced user productivity 400% by implementing a theme editor that allows users to create custom website themes and view changes to color palettes and layouts in real-time.</li>
-                        <li>Spearheaded the enhancement of the application's chat service in .NET, leveraging Entity Framework to architect and optimize intricate queries.</li>
                         <li>Developed and rigorously tested consumable REST APIs for the backend, introducing a suite of new features to augment user experience and functionality.</li>
-                        <li>Enhanced user content creation capabilities by integrating OpenAI API into the backend, enabling users to create custom entries using generative AI.</li>
+                        <li>Improved user content creation capabilities by integrating OpenAI API into the backend, enabling users to create custom entries using generative AI.</li>
+                        <li style={{listStyle: 'none'}}>
+                            {['ASP.NET', 'MVC', 'C#', 'JavaScript', 'HTML', 'CSS'].map((skill, index) => (
+                                <Badge key={index} pill bg="dark" className='me-2 mb-2'>{skill}</Badge>
+                            ))}
+                            
+                        </li>
                     </ul>
+
                 </Col>
             </Row>
             <Row className='mb-3'>
@@ -28,19 +40,15 @@ function Project() {
                     <Stack >
                         <h5>Frontend</h5>
                         <div className='mb-3'>
-                            <Button variant='outline-dark' className='pe-none'>HTML</Button>{' '}
-                            <Button variant='outline-dark' className='pe-none'>CSS</Button>{' '}
-                            <Button variant='outline-dark' className='pe-none'>JavaScript</Button>{' '}
-                            <Button variant='outline-dark' className='pe-none'>React</Button>
+                            {['HTML', 'CSS', 'JavaScript', 'React'].map((skill, index) => (
+                                <Button key={index} variant='outline-dark' className='pe-none mb-2 me-2'>{skill}</Button>
+                            ))}
                         </div>
                         <h5>Backend</h5>
                         <div>
-                        <Button variant='outline-dark' className='pe-none'>Python</Button>{' '}
-                        <Button variant='outline-dark' className='pe-none'>Django</Button>{' '}
-                        <Button variant='outline-dark' className='pe-none'>C#</Button>{' '}
-                        <Button variant='outline-dark' className='pe-none'>.NET</Button>{' '}
-                        <Button variant='outline-dark' className='pe-none'>Docker</Button>{' '}
-                        <Button variant='outline-dark' className='pe-none'>AWS</Button>
+                        {['Python', 'Django', 'C#', '.NET', 'Docker', 'AWS'].map((skill, index) => (
+                            <Button key={index} variant='outline-dark' className='pe-none mb-2 me-2'>{skill}</Button>
+                        ))}
                         </div>
                     </Stack>
                 </Col>
