@@ -9,18 +9,17 @@ function Home() {
             <div>
                 <Row className='mb-2 mt-5'>
                     <Col className="mx-auto text-center">
-                        <div className='display-1'>BRYAN KRISTOFFERSON</div>
-                        <div className='display-6'>
-                            SOFTWARE ENGINEER
-                        </div>
+                        <p className='w-75 mx-auto lead'>
+                            Welcome to my portfolio page!
+                        </p>
                     </Col>
                 </Row>
-                <Row className='mb-2 mt-5'>
-                    <Col md={6} className="mx-auto text-center">
-                    <Image src="/assets/cloud-computing.png"></Image>
-                    </Col>
-                </Row>
-                <Row className='mt-5'>
+                    {/* <Row className='mb-2 mt-5'>
+                        <Col md={6} className="mx-auto text-center">
+                        <Image src="/assets/cloud-computing.png"></Image>
+                        </Col>
+                    </Row> */}
+                <Row>
                     <Col className='mx-auto text-center'>
                         <div>
                         <Link to="/projects">

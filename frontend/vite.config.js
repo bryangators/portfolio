@@ -6,8 +6,14 @@ export default ({ command }) => {
         base: "/",
         plugins: [react()],
         server: {
-            port: 3000,
-            host: "localhost",
-        }
+            host: "0.0.0.0",
+            hmr: {
+              clientPort: 3000,
+            },
+            port: 3000, 
+            watch: {
+              usePolling: true,
+            },
+          }
     });
 };

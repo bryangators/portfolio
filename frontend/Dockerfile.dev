@@ -1,0 +1,16 @@
+# Stage 1: Build the React app
+FROM node:latest
+
+# create working dir
+WORKDIR /app
+
+# install dependencies
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "dev" ]
