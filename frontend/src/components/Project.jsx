@@ -6,7 +6,6 @@ import "./Project.css"
 function Project({title, full_desc, date}) {
 
     const formatDate = (origDate) => {
-        console.log(origDate);
         const dateString = origDate;
         const date = new Date(dateString);
         const formattedDate = date.toLocaleDateString("en-US", {

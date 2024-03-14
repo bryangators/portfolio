@@ -18,7 +18,7 @@ function Home() {
                 </div>
                 <div className="p-2">
                     {['projects', 'resume', 'contact'].map((link, index) => (
-                        <Link to={`/${link}`}>
+                        <Link key={index} to={`/${link}`}>
                         <Button variant='outline-dark'>{link}</Button>{' '}
                         </Link>
                     ))}
