@@ -9,7 +9,7 @@ function Home() {
             <Stack gap={3} className='mt-5'>
                 <div className="p-2 text-start mx-auto home-desc">
                     <h3>
-                        Hello, I'm Bryan, a software engineer based in Florida.
+                        Hello, I'm Bryan, a software engineer in Orlando, Florida.
                     </h3>
                     <span className='lead'>
                         I enjoy building and designing software systems. I have expertise in fullstack web development,
