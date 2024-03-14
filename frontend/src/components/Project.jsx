@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import MarkdownRenderer from "./MarkdownRenderer";
+import "./Project.css"
 
 function Project({title, full_desc, date}) {
 
@@ -18,14 +19,16 @@ function Project({title, full_desc, date}) {
     }
 
     return (  
-        <Container className='p-3 mx-auto'>
+        <Container className='p-3 mx-auto project'>
             <h1 className='mt-5 mb-1'>
                 {title}
             </h1>
             {date && (
                 <p className="mb-5">{formatDate(date)}</p>
             )}
-            <MarkdownRenderer markdown={full_desc}/>
+            <div className="markdown-content">
+                <MarkdownRenderer markdown={full_desc}/>
+            </div>
         </Container>
     );
 }
