@@ -49,7 +49,7 @@ function Contact() {
 
   return (
     <Container className='text-center p-5'>
-      <Form className='w-75 mx-auto text-start border border-dark rounded p-3' style={{maxWidth:'600px'}} onSubmit={handleSubmit}>
+      <Form className='w-75 mx-auto text-start border border-dark rounded p-3' style={{maxWidth:'600px', minWidth: '300px'}} onSubmit={handleSubmit}>
         <div className='text-center'>
           <h1>Contact</h1>
         </div>
