@@ -10,7 +10,7 @@ import './ProjectCard.css'
 function ProjectCard({ id, title, short_desc, imageUrl, languages, technologies, isAdminMode, onDelete }) {
     const { isLoggedIn, isLoading } = ValidateToken();
     const navigate = useNavigate();
-    const DEFAULT_PROJECT_IMAGE_URL = 'assets/cloud-computing.png'
+    const DEFAULT_PROJECT_IMAGE_URL = '/assets/cloud-computing.png'
     
     const handleEdit = () => {
         const projectId = id;

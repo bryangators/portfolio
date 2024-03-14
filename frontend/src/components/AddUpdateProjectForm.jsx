@@ -150,7 +150,7 @@ function AddUpdateProjectForm() {
         <Container className='p-3'>
                 {showProjectPreview ? (
                     <div>
-                        <Project title={formData.title} full_desc={formData.full_desc}></Project>
+                        <Project title={formData.title} full_desc={formData.full_desc} date={formData.date}></Project>
                         <Button variant='outline-danger' onClick={() => setShowProjectPreview(false)}>Close Preview</Button>
                     </div>                        
                 ) : showProjectCard ? (
