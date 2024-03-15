@@ -20,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Create the production image on nginx
-FROM jonasal/nginx-certbot:latest as web
+FROM nginx:latest as web
 
 # copy react build files into public html folder
 COPY --from=builder /app/dist /usr/share/nginx/html
