@@ -13,7 +13,7 @@ The portfolio page is a website that displays relevant information about myself 
 You will need to have Docker and Docker Compose installed. You can do that [here](https://docs.docker.com/compose/install/).
 
 ### Setup Environment Variables
-You will need to fill out Environment Variables. Make a copy of **.env.example** in root of project and call it **.env
+You will need to fill out Environment Variables. Make a copy of **.env.example** in root of project and call it **.env**
 
 ```yaml
 #Server Settings
