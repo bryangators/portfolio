@@ -9,11 +9,13 @@ services:
       - .env
     ports: 
       - '8000:8000'
-    command: >
-      sh -c " python manage.py migrate &&
-          gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
+     command: >
+      sh -c "python manage.py migrate &&
+             gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --keyfile /etc/letsencrypt/live/bryankristofferson.com/privkey.pem --certfile /etc/letsencrypt/live/bryankristofferson.com/fullchain.pem"
     depends_on:
       - db
+    volumes:
+      - "/etc/letsencrypt:/etc/letsencrypt"
   # postgres
   db:
     image: postgres:latest
