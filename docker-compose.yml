@@ -10,8 +10,8 @@ services:
       - .env
     entrypoint: entrypoint.sh
     volumes:
-      - ./etc/letsencrypt:/etc/letsencrypt
-      - ./certbot/data:/var/www/certbot
+      - letsencrypt_data:/etc/letsencrypt
+      - certbot_data:/var/www/certbot
   # django
   api: 
     container_name: api
@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
+      - letsencrypt_data:/etc/letsencrypt
   # postgres
   db:
     container_name: db
@@ -52,8 +52,10 @@ services:
     depends_on:
       - api
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - ./certbot/data:/var/www/certbot
+      - letsencrypt_data:/etc/letsencrypt
+      - certbot_data:/var/www/certbot
 
 volumes:
   db_data:
+  letsencrypt_data:
+  certbot_data:
