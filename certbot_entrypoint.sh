@@ -7,3 +7,4 @@ fi
 
 # renew certs
 certbot renew --webroot --webroot-path=/var/www/certbot
+
