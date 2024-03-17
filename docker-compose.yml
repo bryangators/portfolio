@@ -8,7 +8,7 @@ services:
       - frontend
     env_file:
       - .env
-    entrypoint: entrypoint.sh
+    entrypoint: ./entrypoint.sh
     volumes:
       - letsencrypt_data:/etc/letsencrypt
       - certbot_data:/var/www/certbot
