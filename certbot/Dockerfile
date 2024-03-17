@@ -5,7 +5,7 @@ FROM certbot/certbot:latest
 WORKDIR /app
 
 # Copy the script into the container
-COPY entrypoint.sh /usr/src/app/
+COPY entrypoint.sh .
 
 # Set execute permissions for the script
 RUN chmod +x entrypoint.sh
