@@ -17,6 +17,7 @@ services:
       - ./certbot/data:/var/www/certbot
   # django
   api: 
+    container_name: api
     build:
       context: backend
       dockerfile: Dockerfile
@@ -33,6 +34,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
   # postgres
   db:
+    container_name: db
     image: postgres:latest
     env_file:
       - .env 
@@ -42,6 +44,7 @@ services:
       - "5432:5432"
   # react/nginx
   frontend:
+    container_name: frontend
     build:
       context: frontend
       dockerfile: Dockerfile
