@@ -2,13 +2,14 @@ version: '3.8'
 services:
   # certbot
   certbot:
+    build:
+      context: certbot
+      dockerfile: Dockerfile
     container_name: certbot
-    image: certbot/certbot:latest
     depends_on:
       - frontend
     env_file:
       - .env
-    entrypoint: ./entrypoint.sh
     volumes:
       - letsencrypt_data:/etc/letsencrypt
       - certbot_data:/var/www/certbot
