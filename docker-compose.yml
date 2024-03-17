@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     volumes:
-      - letsencrypt_data:/etc/letsencrypt
+      - /ect/letsencrypt:/etc/letsencrypt
       - certbot_data:/var/www/certbot
   # django
   api: 
@@ -29,7 +29,7 @@ services:
     depends_on:
       - db
     volumes:
-      - letsencrypt_data:/etc/letsencrypt
+      - /ect/letsencrypt:/etc/letsencrypt
   # postgres
   db:
     container_name: db
@@ -53,10 +53,9 @@ services:
     depends_on:
       - api
     volumes:
-      - letsencrypt_data:/etc/letsencrypt
+      - /ect/letsencrypt:/etc/letsencrypt
       - certbot_data:/var/www/certbot
 
 volumes:
   db_data:
-  letsencrypt_data:
   certbot_data:
