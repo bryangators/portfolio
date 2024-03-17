@@ -1,6 +1,11 @@
 version: '3.8'
 services:
-# django
+  # certbot
+  certbot:
+      image: certbot/certbot
+      volumes:
+        - "/etc/letsencrypt:/etc/letsencrypt"
+  # django
   api: 
     build:
       context: backend
