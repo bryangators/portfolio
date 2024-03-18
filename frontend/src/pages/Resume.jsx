@@ -10,6 +10,7 @@ function Project() {
                     <h2>Experience</h2>
                     <strong>Correctional Systems Officer</strong> at <Link to={"https://www.bop.gov/"} target="_blank" rel="noopener noreferrer">Federal Bureau of Prisons</Link> (2010 - Present)
                     <ul>
+                        <li>Established a reputation as a dependable authority to guide, mentor, and cultivate new team members in a diverse environment while serving as a subject matter expert for senior leadership.</li>
                         <li>Accomplishments: SORT Operator, STARS Leadership Graduate, Officer of the Quarter, Sustained Superior Performance, Quality Step Increase, Contraband Officer of the Month, Time Off Award</li>
                         <li style={{listStyle: 'none'}}>
                             {['Security Clearance', 'Leadership', 'Teamwork', 'Problem-Solving', 'Interpersonal Skills'].map((skill, index) => (
@@ -20,10 +21,11 @@ function Project() {
                     </ul>
                     <strong>Software Engineer</strong> at <Link to={"https://www.iln.app/"} target="_blank" rel="noopener noreferrer">ILN</Link> (2023-2024)
                     <ul>
-                        <li>Developed application's chat service in .NET, leveraging Entity Framework to architect and optimize intricate queries.</li>
-                        <li>Enhanced user productivity 400% by implementing a theme editor that allows users to create custom website themes and view changes to color palettes and layouts in real-time.</li>
-                        <li>Developed and rigorously tested consumable REST APIs for the backend, introducing a suite of new features to augment user experience and functionality.</li>
-                        <li>Improved user content creation capabilities by integrating OpenAI API into the backend, enabling users to create custom entries using generative AI.</li>
+                        <li>Collaborated with fellow engineers in the design, development, testing, and maintenance of application code within a Service-Oriented Architecture, employing MVC principles to ensure scalability and maintainability.</li>
+                        <li>Improved application performance in key services through the implementation of scalable backend components, APIs, and essential business logic</li>
+                        <li>Enhanced user experiences by developing and implementing efficient solutions utilizing asynchronous and multi-threaded design patterns to optimize performance in critical areas of the application.</li>
+                        <li>Participated in the code review process and collaborated with fellow engineers in the development of complex application services, ensuring code quality, consistency, and adherence to best practices.</li>
+                        <li>Demonstrated excellent written and verbal communication skills, effectively collaborating with diverse teams of all skill levels to drive projects forward and achieve desired outcomes.</li>
                         <li style={{listStyle: 'none'}}>
                             {['ASP.NET', 'MVC', 'C#', 'JavaScript', 'HTML', 'CSS'].map((skill, index) => (
                                 <Badge key={index} pill bg="dark" className='me-2 mb-2'>{skill}</Badge>
