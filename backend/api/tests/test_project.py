@@ -47,7 +47,7 @@ class ProjectTestCase(APITestCase):
 
         # Reload the project from the database
         project = Project.objects.get(id=self.new_project_id)
-        self.assertEqual(project.date, updated_data['title'])
+        self.assertEqual(project.title, updated_data['title'])
         
         
         
