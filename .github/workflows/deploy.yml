@@ -8,7 +8,8 @@ on:
 jobs:
   test:
     name: Testing
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest  
+    environment: testing_env
     strategy:
       max-parallel: 4
       matrix:
@@ -17,9 +18,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_USER: ${{ env.testing_env.DB_USER }}
-          POSTGRES_PASSWORD: ${{ env.testing_env.DB_PASSWORD }}
-          POSTGRES_DB: ${{ env.testing_env.DB_NAME }}
+          POSTGRES_USER: ${{ vars.DB_USER }}
+          POSTGRES_PASSWORD: ${{ vars.DB_PASSWORD }}
+          POSTGRES_DB: ${{ vars.DB_NAME }}
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -40,7 +41,7 @@ jobs:
     - name: Run Tests
       env:
           DJANGO_DEBUG_MODE: ${{ vars.DJANGO_DEBUG_MODE }}
-          DJANGO_SECRET_KEY: ${{ secrets.testing_env.DJANGO_SECRET_KEY }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DJANGO_ALLOWED_HOSTS: ${{ vars.DJANGO_ALLOWED_HOSTS }}
           CORS_ALLOWED_ORIGINS: ${{ vars.CORS_ALLOWED_ORIGINS }}
           DB_HOST: ${{ vars.DB_HOST }}
@@ -48,12 +49,12 @@ jobs:
           DB_PASSWORD: ${{ vars.DB_PASSWORD }}
           DB_PORT: ${{ vars.DB_PORT }}
           DB_USER: ${{ vars.DB_USER }}
-          EMAIL_CONTACT_ALIAS: ${{ secrets.testing_env.EMAIL_CONTACT_ALIAS }}
-          EMAIL_HOST: ${{ secrets.testing_env.EMAIL_HOST }}
-          EMAIL_HOST_PASSWORD: ${{ secrets.testing_env.EMAIL_HOST_PASSWORD }}
-          EMAIL_HOST_USER: ${{ secrets.testing_env.EMAIL_HOST_USER }}
-          EMAIL_PORT: ${{ secrets.testing_env.EMAIL_PORT }}
-          EMAIL_USE_TLS: ${{ secrets.testing_env.EMAIL_USE_TLS }}
+          EMAIL_CONTACT_ALIAS: ${{ secrets.EMAIL_CONTACT_ALIAS }}
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+          EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+          EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+          EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
       working-directory: ./backend
       run: |
         python manage.py migrate
