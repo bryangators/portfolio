@@ -17,9 +17,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_USER: ${{ env.testing_env.DB_USER }}
-          POSTGRES_PASSWORD: ${{ env.testing_env.DB_PASSWORD }}
-          POSTGRES_DB: ${{ env.testing_env.DB_NAME }}
+          POSTGRES_USER: ${{ vars.testing_env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ vars.testing_env.DB_PASSWORD }}
+          POSTGRES_DB: ${{ vars.testing_env.DB_NAME }}
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -39,15 +39,15 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
-          DJANGO_DEBUG_MODE: ${{ env.testing_env.DJANGO_DEBUG_MODE }}
+          DJANGO_DEBUG_MODE: ${{ vars.testing_env.DJANGO_DEBUG_MODE }}
           DJANGO_SECRET_KEY: ${{ secrets.testing_env.DJANGO_SECRET_KEY }}
-          DJANGO_ALLOWED_HOSTS: ${{ env.testing_env.DJANGO_ALLOWED_HOSTS }}
-          CORS_ALLOWED_ORIGINS: ${{ env.testing_env.CORS_ALLOWED_ORIGINS }}
-          DB_HOST: ${{ env.testing_env.DB_HOST }}
-          DB_NAME: ${{ env.testing_env.DB_NAME }}
-          DB_PASSWORD: ${{ env.testing_env.DB_PASSWORD }}
-          DB_PORT: ${{ env.testing_env.DB_PORT }}
-          DB_USER: ${{ env.testing_env.DB_USER }}
+          DJANGO_ALLOWED_HOSTS: ${{ vars.testing_env.DJANGO_ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ vars.testing_env.CORS_ALLOWED_ORIGINS }}
+          DB_HOST: ${{ vars.testing_env.DB_HOST }}
+          DB_NAME: ${{ vars.testing_env.DB_NAME }}
+          DB_PASSWORD: ${{ vars.testing_env.DB_PASSWORD }}
+          DB_PORT: ${{ vars.testing_env.DB_PORT }}
+          DB_USER: ${{ vars.testing_env.DB_USER }}
           EMAIL_CONTACT_ALIAS: ${{ secrets.testing_env.EMAIL_CONTACT_ALIAS }}
           EMAIL_HOST: ${{ secrets.testing_env.EMAIL_HOST }}
           EMAIL_HOST_PASSWORD: ${{ secrets.testing_env.EMAIL_HOST_PASSWORD }}
