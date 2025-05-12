@@ -1,69 +1,87 @@
-import React from 'react';
-import { Container, Row, Col, Stack, Button, Badge } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Stack } from 'react-bootstrap';
+import "./Resume.css"
 
-function Project() {
-    return (
-        <Container className="home-page text-start p-2">
-            <Row className='mt-5'>
-                <Col md={8} className="mx-auto">
-                    <h2>Experience</h2>
-                    <strong>Correctional Systems Officer</strong> at <Link to={"https://www.bop.gov/"} target="_blank" rel="noopener noreferrer">Federal Bureau of Prisons</Link> (2010 - Present)
-                    <ul>
-                        <li>Established a reputation as a dependable authority to guide, mentor, and cultivate new team members in a diverse environment while serving as a subject matter expert for senior leadership.</li>
-                        <li>Accomplishments: SORT Operator, STARS Leadership Graduate, Officer of the Quarter, Sustained Superior Performance, Quality Step Increase, Contraband Officer of the Month, Time Off Award</li>
-                        <li style={{listStyle: 'none'}}>
-                            {['Security Clearance', 'Leadership', 'Teamwork', 'Problem-Solving', 'Interpersonal Skills'].map((skill, index) => (
-                                <Badge key={index} pill bg="dark" className='me-2 mb-2'>{skill}</Badge>
-                            ))}
-                            
-                        </li>
-                    </ul>
-                    <strong>Software Engineer</strong> at <Link to={"https://www.iln.app/"} target="_blank" rel="noopener noreferrer">ILN</Link> (2023-2024)
-                    <ul>
-                        <li>Collaborated with fellow engineers in the design, development, testing, and maintenance of application code within a Service-Oriented Architecture, employing MVC principles to ensure scalability and maintainability.</li>
-                        <li>Improved application performance in key services through the implementation of scalable backend components, APIs, and essential business logic</li>
-                        <li>Enhanced user experiences by developing and implementing efficient solutions utilizing asynchronous and multi-threaded design patterns to optimize performance in critical areas of the application.</li>
-                        <li>Participated in the code review process and collaborated with fellow engineers in the development of complex application services, ensuring code quality, consistency, and adherence to best practices.</li>
-                        <li>Demonstrated excellent written and verbal communication skills, effectively collaborating with diverse teams of all skill levels to drive projects forward and achieve desired outcomes.</li>
-                        <li style={{listStyle: 'none'}}>
-                            {['ASP.NET', 'MVC', 'C#', 'JavaScript', 'HTML', 'CSS'].map((skill, index) => (
-                                <Badge key={index} pill bg="dark" className='me-2 mb-2'>{skill}</Badge>
-                            ))}
-                            
-                        </li>
-                    </ul>
+function Resume() {
+  return (
+    <Container className="resume-page text-start p-2">
+      <Row className='mt-5'>
+        <Col md={8} className="mx-auto">
+          <h2>Education</h2>
+          <strong>Bachelor of Science in Computer Science</strong> at <em> University of Florida</em> (Dec 2022)
+          <p>GPA: 3.92/4.0</p>
+          <p>Honors: Cum Laude</p>
+        </Col>
+      </Row>
+      <Row className='mt-2'>
+        <Col md={8} className="mx-auto">
+            <h2>Technical Skills</h2>
 
-                </Col>
-            </Row>
-            <Row className='mb-3'>
-                <Col md={8} className="mx-auto">                    
-                    <h2>Skills</h2>
-                    <Stack >
-                        <h5>Frontend</h5>
-                        <div className='mb-3'>
-                            {['HTML', 'CSS', 'JavaScript', 'React'].map((skill, index) => (
-                                <Button key={index} variant='outline-dark' className='pe-none mb-2 me-2'>{skill}</Button>
-                            ))}
-                        </div>
-                        <h5>Backend</h5>
-                        <div>
-                        {['Python', 'Django', 'C#', '.NET', 'Docker', 'AWS'].map((skill, index) => (
-                            <Button key={index} variant='outline-dark' className='pe-none mb-2 me-2'>{skill}</Button>
-                        ))}
-                        </div>
-                    </Stack>
-                </Col>
-            </Row>
-            <Row className='mb-5'>
-                <Col md={8} className="mx-auto">
-                <h2>Education</h2>
-                <strong>Bachelor of Science in Computer Science</strong> at
-                <Link to={"https://ufonline.ufl.edu/degrees/undergraduate/computer-science/"} target="_blank" rel="noopener noreferrer"><em> University of Florida</em></Link> (2022)
-                </Col>
-            </Row>
-        </Container>
-    );
-  }
+            <h5>Languages</h5>
+            <ul>
+                <li>Python, C#, JavaScript, TypeScript</li>
+            </ul>
+            <h5>Frameworks & Libraries</h5>
+            <ul>
+                <li>React, Node.js, Django, .NET MVC</li>
+            </ul>
+            <h5>Databases</h5>
+            <ul>
+                <li>MySQL, PostgreSQL, OracleDB</li>
+            </ul>
+            <h5>DevOps & Tools</h5>
+            <ul>
+                <li>Git, GitHub Actions, Terraform, Docker, Docker Compose, Postman</li>
+            </ul>
+            <h5>Cloud</h5>
+            <ul>
+                <li>AWS</li>
+            </ul>
+        </Col>
+      </Row>
+      <Row className='mt-2'>
+        <Col md={8} className="mx-auto">
+          <h2>Relevant Experience</h2>
 
-  export default Project;
+          <h5>Software Engineer | RWX Solutions | Remote (Part-time)</h5>
+          <p><em>Mar 2024 - Aug 2024</em></p>
+          <ul>
+            <li>Participated in system architecture discussions and contributed to technology stack decisions centered around TypeScript, React, and Node.js.</li>
+            <li>Developed full-stack features using React, HTML, CSS, and Node.js; wrote supporting technical design documentation.</li>
+            <li>Built and tested modular UI components in isolation with StorybookJS to accelerate frontend development and ensure design consistency.</li>
+            <li>Implemented unit and integration tests using Jest to maintain high code quality.</li>
+            <li>Conducted code reviews and collaborated with team members to enforce best practices and clean code standards.</li>
+          </ul>
+
+          <h5>Correctional Systems Officer | Federal Bureau of Prisons | Coleman, FL</h5>
+          <p><em>July 2010 - Present</em></p>
+          <ul>
+            <li>Demonstrated strong independent work ethic and effective time management skills, successfully balancing multiple competing tasks.</li>
+            <li>Established a reputation as a dependable authority to guide, mentor, and cultivate new team members in a diverse environment.</li>
+          </ul>
+
+          <h5>Software Developer | ILN | Remote (Part-time)</h5>
+          <p><em>Mar 2023 - Mar 2024</em></p>
+          <ul>
+            <li>Increased user efficiency by 50% by developing a real-time virtual editor, eliminating the need for manual changes and separate previews when creating custom website themes.</li>
+            <li>Spearheaded the enhancement of the application's chat service in .NET, leveraging Entity Framework to architect and optimize intricate queries.</li>
+            <li>Developed and tested consumable REST APIs for the backend, introducing a suite of new features to augment user experience and functionality.</li>
+            <li>Managed and optimized Entity Framework MVC applications, improving database interactions and system performance.</li>
+            <li>Designed and maintained SQL databases, implementing performance optimizations and indexing strategies to enhance query execution speed.</li>
+            <li>Leveraged full-stack development expertise in C#, .NET MVC, JavaScript, HTML, CSS, and SQL, while following DevOps best practices for scalable and maintainable applications.</li>
+          </ul>
+        </Col>
+      </Row>
+      <Row className='mt-2'>
+        <Col md={8} className="mx-auto">
+          <h2>Certifications</h2>
+          <ul>
+            <li>AWS Certified Solutions Architect – Associate (Sep 2024)</li>
+            <li>CompTIA - A+ (Apr 2016)</li>
+          </ul>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default Resume;

@@ -1,6 +1,5 @@
-import React from "react";
 import { Container } from "react-bootstrap";
-import MarkdownRenderer from "./MarkdownRenderer";
+import MarkdownRenderer from "../utils/MarkdownRenderer";
 import "./Project.css"
 
 function Project({title, full_desc, date}) {

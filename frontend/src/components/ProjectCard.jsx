@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge, Card,} from "react-bootstrap";
 import { ValidateToken } from "../api/apiService";
 import { useNavigate } from "react-router-dom";
