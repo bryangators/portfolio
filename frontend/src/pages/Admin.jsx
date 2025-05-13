@@ -38,10 +38,15 @@ function Admin() {
           </Col>
       </Row>
       <Row xs={1} md={2} className="g-4 mx-auto">
-        {data.map((project, idx) =>  (
-          <Col key={idx} className='d-flex justify-content-center'>
+        {data.length === 0 ? (
+          <Col>
+            <p className="text-muted">No projects found. Add a new project to get started.</p>
+          </Col>
+        ) : (
+          data.map((project, idx) => (
+            <Col key={idx} className='d-flex justify-content-center'>
               <Row>
-                  <ProjectCard
+                <ProjectCard
                   id={project.id}
                   title={project.title}
                   content={project.short_desc}
@@ -50,10 +55,11 @@ function Admin() {
                   technologies={project.technologies}
                   isAdminMode={true}
                   onDelete={handleDelete}
-                  />
-              </Row>              
-          </Col>
-        ))}
+                />
+              </Row>
+            </Col>
+          ))
+        )}
       </Row>
     </Container>
   );
