@@ -38,10 +38,8 @@ function Admin() {
           </Col>
       </Row>
       <Row xs={1} md={2} className="g-4 mx-auto">
-        {data.length === 0 ? (
-          <Col>
-            <p className="text-muted">No projects found. Add a new project to get started.</p>
-          </Col>
+        {!Array.isArray(data) ? (
+          <p className="text-danger">Failed to load projects</p>
         ) : (
           data.map((project, idx) => (
             <Col key={idx} className='d-flex justify-content-center'>
