@@ -25,7 +25,7 @@ function App() {
             <Route path="/projects" Component={Projects} />
             <Route path='/projects/:id' Component={ProjectDisplay} />
             <Route path="/resume" Component={Resume} />
-            <Route path="/contact" Component={Contact} />
+            {/* <Route path="/contact" Component={Contact} /> */}
             {/* <Route path="/login" Component={Login} />
             <Route Component={ProtectedRoute}>
               <Route path="/admin" Component={Admin} /> 
