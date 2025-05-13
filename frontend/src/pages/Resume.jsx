@@ -1,4 +1,4 @@
-import { Container, Row, Col, Stack } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import "./Resume.css"
 
 function Resume() {
@@ -28,7 +28,7 @@ function Resume() {
                 <h2>Relevant Experience</h2>
 
                 <h5>Software Engineer | RWX Solutions | Remote (Part-time)</h5>
-                <p><em>Mar 2024 - Aug 2024</em></p>
+                <p><em>Mar 2025 - Present</em></p>
                 <ul>
                 <li>Participated in system architecture discussions and contributed to technology stack decisions centered around TypeScript, React, and Node.js.</li>
                 <li>Developed full-stack features using React, HTML, CSS, and Node.js; wrote supporting technical design documentation.</li>
