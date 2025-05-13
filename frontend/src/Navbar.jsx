@@ -13,7 +13,7 @@ function NavbarComponent() {
           <Nav className="me-auto">
             {/* <Nav.Link as={Link} to="/projects">PROJECTS</Nav.Link> */}
             <Nav.Link as={Link} to="/resume">RESUME</Nav.Link>
-            <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
+            {/* <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
