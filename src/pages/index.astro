@@ -1,16 +1,195 @@
 ---
+const projects = [
+  {
+    name: "project-backend",
+    description: "Backend service built with TypeScript",
+    tech: "TypeScript",
+    url: "https://github.com/bryangators/project-backend",
+  },
+  {
+    name: "aws-ses-poc",
+    description: "Proof of concept for AWS SES email integration",
+    tech: "AWS",
+    url: "https://github.com/bryangators/aws-ses-poc",
+  },
+  {
+    name: "serverless_chatbot",
+    description: "Serverless chatbot infrastructure",
+    tech: "Terraform",
+    url: "https://github.com/bryangators/serverless_chatbot",
+  },
+  {
+    name: "trafficPro",
+    description: "Traffic analysis tooling",
+    tech: "Python",
+    url: "https://github.com/bryangators/trafficPro",
+  },
+];
 
+const skills = ["TypeScript", "Bun", "Node.js", "Python", "PostgreSQL", "MongoDB", "AWS"];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Bryan Kristofferson - Backend Engineer" />
+    <title>Bryan Kristofferson</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: #202122;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      a {
+        color: #0645ad;
+      }
+
+      a:visited {
+        color: #0b0080;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        font-weight: normal;
+        border-bottom: 1px solid #a2a9b1;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: #54595d;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        font-weight: normal;
+        border-bottom: 1px solid #a2a9b1;
+        padding-bottom: 0.2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+
+      .skills-list {
+        list-style: none;
+        margin-left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+      }
+
+      .infobox {
+        float: right;
+        background: #f8f9fa;
+        border: 1px solid #a2a9b1;
+        padding: 1rem;
+        margin: 0 0 1rem 1.5rem;
+        font-size: 0.9rem;
+        width: 260px;
+      }
+
+      .infobox-title {
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #a2a9b1;
+      }
+
+      .infobox-row {
+        display: flex;
+        padding: 0.25rem 0;
+      }
+
+      .infobox-label {
+        font-weight: bold;
+        width: 80px;
+        flex-shrink: 0;
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #a2a9b1;
+        color: #54595d;
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 600px) {
+        .infobox {
+          float: none;
+          width: 100%;
+          margin: 0 0 1.5rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <h1>Bryan Kristofferson</h1>
+      <p class="subtitle">Backend Engineer based in Orlando, FL</p>
+
+      <div class="infobox">
+        <div class="infobox-title">Contact</div>
+        <div class="infobox-row">
+          <span class="infobox-label">GitHub</span>
+          <a href="https://github.com/bryangators">bryangators</a>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/b-kristofferson/">b-kristofferson</a>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-label">Email</span>
+          <a href="mailto:bryankristofferson@gmail.com">Email me</a>
+        </div>
+      </div>
+
+      <p>
+        Family man with a love for technology and learning. I enjoy architecting backend systems and building reliable, scalable solutions.
+      </p>
+
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        {skills.map((skill) => <li>{skill}</li>)}
+      </ul>
+
+      <h2>Projects</h2>
+      <ul>
+        {projects.map((project) => (
+          <li>
+            <a href={project.url} target="_blank" rel="noopener">{project.name}</a> ({project.tech}) — {project.description}
+          </li>
+        ))}
+      </ul>
+
+      <footer>
+        Last updated December 2025
+      </footer>
+    </article>
+  </body>
 </html>
