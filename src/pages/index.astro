@@ -140,10 +140,45 @@ const skills = ["TypeScript", "Bun", "Node.js", "Python", "PostgreSQL", "MongoDB
       }
 
       @media (max-width: 600px) {
+        body {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.15rem;
+        }
+
         .infobox {
           float: none;
           width: 100%;
-          margin: 0 0 1.5rem 0;
+          max-width: 280px;
+          margin: 0 auto 1.5rem auto;
+          text-align: center;
+        }
+
+        .infobox-row {
+          flex-direction: column;
+          gap: 0.1rem;
+        }
+
+        .infobox-label {
+          width: auto;
+        }
+
+        .skills-list {
+          gap: 0.25rem 1rem;
+        }
+
+        ul {
+          margin-left: 1rem;
+        }
+
+        li {
+          margin-bottom: 0.5rem;
         }
       }
     </style>
